@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Talk to a Stranger</title>
+    <meta name="description" content="Anonymous one-to-one text chat. Matched by language first, translated when needed." />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="referrer" content="no-referrer" />
+    <link rel="stylesheet" href="/css/app.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%AC%3C/text%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <main id="app">
+      <!-- ---------------------------------------------------------- home -->
+      <section class="screen screen--home" id="screen-home" data-active>
+        <div class="card">
+          <h1 class="title" data-i18n="title">Talk to a stranger</h1>
+          <p class="subtitle" data-i18n="subtitle">
+            One-to-one, anonymous, no profiles.
+          </p>
+
+          <label class="field">
+            <span class="field__label" data-i18n="chooseLanguage">Choose your language</span>
+            <select id="language-select" class="select"></select>
+          </label>
+
+          <div class="field">
+            <span class="field__label">
+              <span data-i18n="interests">Interests</span>
+              <span class="field__hint" data-i18n="optional">(optional)</span>
+            </span>
+            <div class="chips" id="interest-chips"></div>
+          </div>
+
+          <button class="button button--primary button--large" id="start-button" data-i18n="startChat">
+            Start chat
+          </button>
+
+          <p class="note" data-i18n="languageNote">
+            Your first match will prioritise people who speak your language.
+          </p>
+
+          <p class="density" id="density-line" hidden></p>
+
+          <p class="demo-note" id="demo-note" hidden></p>
+        </div>
+
+        <footer class="legal">
+          <span data-i18n="legal">Be kind. Never share personal information. You must be 18 or older.</span>
+        </footer>
+      </section>
+
+      <!-- ------------------------------------------------------- searching -->
+      <section class="screen screen--searching" id="screen-searching">
+        <div class="card card--center">
+          <div class="pulse" aria-hidden="true"><span></span><span></span><span></span></div>
+          <h2 class="searching__status" id="search-status" data-i18n="searching">
+            Searching for someone…
+          </h2>
+          <p class="searching__detail" id="search-detail"></p>
+
+          <div class="offer" id="bot-offer" hidden>
+            <p class="offer__text" data-i18n="noOneAvailable">No one is available right now.</p>
+            <p class="offer__question" data-i18n="talkToAiQuestion">
+              Would you like to talk to an AI instead?
+            </p>
+            <div class="offer__actions">
+              <button class="button button--primary" id="accept-bot" data-i18n="talkToAi">
+                Talk to AI
+              </button>
+              <button class="button button--ghost" id="decline-bot" data-i18n="keepWaiting">
+                Keep waiting
+              </button>
+            </div>
+          </div>
+
+          <div class="searching__actions">
+            <button class="button button--ghost" id="cancel-search" data-i18n="cancel">Cancel</button>
+            <button class="button button--ghost" id="request-bot" hidden data-i18n="talkToAi">
+              Talk to AI
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ------------------------------------------------------------ chat -->
+      <section class="screen screen--chat" id="screen-chat">
+        <header class="chat__header">
+          <div class="badges" id="chat-badges"></div>
+          <div class="chat__actions">
+            <button class="button button--small button--ghost" id="report-button" data-i18n="report">
+              Report
+            </button>
+            <button class="button button--small button--ghost" id="skip-button" data-i18n="next">
+              Next
+            </button>
+            <button class="button button--small button--danger" id="stop-button" data-i18n="stop">
+              Stop
+            </button>
+          </div>
+        </header>
+
+        <div class="banner" id="translation-banner" hidden></div>
+        <div class="banner banner--warn" id="degraded-banner" hidden></div>
+
+        <div class="messages" id="messages" role="log" aria-live="polite"></div>
+
+        <div class="typing" id="typing-indicator" hidden>
+          <span></span><span></span><span></span>
+        </div>
+
+        <form class="composer" id="composer">
+          <input
+            class="composer__input"
+            id="composer-input"
+            type="text"
+            autocomplete="off"
+            maxlength="2000"
+            data-i18n-placeholder="messagePlaceholder"
+            placeholder="Say something…"
+          />
+          <button class="button button--primary" type="submit" data-i18n="send">Send</button>
+        </form>
+      </section>
+
+      <!-- ----------------------------------------------------------- ended -->
+      <section class="screen screen--ended" id="screen-ended">
+        <div class="card card--center">
+          <h2 id="ended-title" data-i18n="conversationEnded">Conversation ended</h2>
+          <p id="ended-detail" class="note"></p>
+          <div class="ended__actions">
+            <button class="button button--primary" id="new-chat" data-i18n="newChat">New chat</button>
+            <button class="button button--ghost" id="back-home" data-i18n="backHome">Back</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- §29 — a real person turned up while the user is with the AI. -->
+    <div class="modal" id="human-modal" hidden>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="human-modal-title">
+        <h3 id="human-modal-title" data-i18n="realPersonAvailable">A real person is available.</h3>
+        <div class="modal__actions">
+          <button class="button button--primary" id="accept-human" data-i18n="talkToThem">
+            Talk to them
+          </button>
+          <button class="button button--ghost" id="stay-with-bot" data-i18n="stayWithAi">
+            Stay with AI
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" hidden></div>
+
+    <script type="module" src="/js/app.js"></script>
+  </body>
+</html>
