@@ -1,0 +1,49 @@
+# Render blueprint — one-click demo deployment.
+#
+# The free instance type supports WebSockets, which is all this needs: without
+# REDIS_URL or DATABASE_URL the platform runs entirely in memory, so a demo
+# needs no database and no credentials at all.
+#
+# Caveats of the free plan, worth knowing before you send someone a link:
+#   - the service sleeps after 15 minutes with no traffic and takes about a
+#     minute to wake, so open the link yourself shortly before demoing;
+#   - one instance only, and in-memory state is lost on restart. That is fine
+#     here — two people in the same chat are always on that one instance.
+
+services:
+  - type: web
+    name: strangerchat
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info
+      # Render terminates TLS in front of the app.
+      - key: TRUST_PROXY
+        value: "true"
+
+      # Demo-tuned wait ladder. The defaults (5s / 10s / 20s) are right for a
+      # real launch but make a live demo drag, so this shortens each rung.
+      # Delete these three to get the documented behaviour back.
+      - key: MATCH_TIER1_MS
+        value: "3000"
+      - key: MATCH_TIER2_MS
+        value: "6000"
+      - key: MATCH_TIER3_MS
+        value: "12000"
+
+      # Optional. Without them the demo still works end to end, but translated
+      # messages come back tagged by the echo provider instead of translated,
+      # and the AI replies from a short scripted phrasebook.
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GOOGLE_TRANSLATE_API_KEY
+        sync: false
+
+      # Set a value to unlock /api/admin/stats and /api/admin/cost.
+      - key: ADMIN_TOKEN
+        sync: false

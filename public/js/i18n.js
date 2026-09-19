@@ -58,6 +58,7 @@ const STRINGS = {
     botUnavailable: 'The AI chat is not available right now.',
     rateLimited: 'Slow down a little.',
     reported: 'Reported. Finding someone else.',
+    demoMode: 'Demo mode: no translation or AI credentials are configured, so translated messages are tagged rather than translated and the AI replies from a short script.',
     interest: {
       gaming: 'gaming', music: 'music', movies: 'movies', technology: 'technology',
       sports: 'sports', travel: 'travel', books: 'books', food: 'food',
@@ -115,6 +116,7 @@ const STRINGS = {
     botUnavailable: 'Yapay zekâ sohbeti şu anda kullanılamıyor.',
     rateLimited: 'Biraz yavaşla.',
     reported: 'Şikâyet alındı. Başka biri aranıyor.',
+    demoMode: 'Demo modu: çeviri ve yapay zekâ anahtarları tanımlı değil; çevrilen mesajlar gerçekten çevrilmek yerine etiketlenir ve yapay zekâ kısa bir hazır metinle yanıt verir.',
     interest: {
       gaming: 'oyun', music: 'müzik', movies: 'film', technology: 'teknoloji',
       sports: 'spor', travel: 'seyahat', books: 'kitap', food: 'yemek',
@@ -172,6 +174,7 @@ const STRINGS = {
     botUnavailable: 'Der KI-Chat ist gerade nicht verfügbar.',
     rateLimited: 'Etwas langsamer bitte.',
     reported: 'Gemeldet. Wir suchen jemand anderen.',
+    demoMode: 'Demo-Modus: Es sind keine Übersetzungs- oder KI-Zugangsdaten hinterlegt. Übersetzte Nachrichten werden nur markiert, und die KI antwortet aus einem kurzen Skript.',
     interest: {
       gaming: 'Gaming', music: 'Musik', movies: 'Filme', technology: 'Technik',
       sports: 'Sport', travel: 'Reisen', books: 'Bücher', food: 'Essen',
@@ -229,6 +232,7 @@ const STRINGS = {
     botUnavailable: 'El chat con la IA no está disponible ahora.',
     rateLimited: 'Ve un poco más despacio.',
     reported: 'Reportado. Buscando a otra persona.',
+    demoMode: 'Modo demo: no hay credenciales de traducción ni de IA, así que los mensajes traducidos se marcan en vez de traducirse y la IA responde con un guion corto.',
     interest: {
       gaming: 'videojuegos', music: 'música', movies: 'cine', technology: 'tecnología',
       sports: 'deporte', travel: 'viajes', books: 'libros', food: 'comida',
@@ -286,6 +290,7 @@ const STRINGS = {
     botUnavailable: 'Le chat IA n’est pas disponible pour l’instant.',
     rateLimited: 'Doucement.',
     reported: 'Signalé. On cherche quelqu’un d’autre.',
+    demoMode: 'Mode démo : aucune clé de traduction ou d’IA n’est configurée ; les messages traduits sont marqués au lieu d’être traduits et l’IA répond à partir d’un court script.',
     interest: {
       gaming: 'jeux vidéo', music: 'musique', movies: 'cinéma', technology: 'technologie',
       sports: 'sport', travel: 'voyage', books: 'livres', food: 'cuisine',
@@ -343,6 +348,7 @@ const STRINGS = {
     botUnavailable: '現在AIチャットは利用できません。',
     rateLimited: '少しゆっくり送ってください。',
     reported: '報告しました。別の相手を探します。',
+    demoMode: 'デモモード：翻訳とAIの認証情報が未設定のため、翻訳メッセージは翻訳されずに印が付き、AIは短い定型文で応答します。',
     interest: {
       gaming: 'ゲーム', music: '音楽', movies: '映画', technology: 'テクノロジー',
       sports: 'スポーツ', travel: '旅行', books: '本', food: '食べ物',

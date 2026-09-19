@@ -45,6 +45,17 @@ cp .env.example .env
 docker compose up --build
 ```
 
+## Deploying
+
+The app is one long-lived process holding WebSocket connections, so it needs a
+container host rather than a static or serverless one — `render.yaml`,
+`railway.json` and `fly.toml` are in the repo and all use the same `Dockerfile`.
+Render's free instance type supports WebSockets and needs no database or
+credentials, which makes it the shortest path to a shareable link.
+
+[`docs/DEPLOY.md`](docs/DEPLOY.md) has the steps, the free-plan caveats, and why
+GitHub Pages and Vercel do not work for this without moving state into Redis.
+
 ### Tests
 
 ```bash

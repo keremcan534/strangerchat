@@ -61,7 +61,11 @@ export function createRequestHandler(deps: ApiDeps) {
         json(res, 200, {
           languages: SUPPORTED_LANGUAGES,
           interests: SUPPORTED_INTERESTS,
-          bot: { enabled: config.bot.enabled, mode: config.bot.mode },
+          bot: {
+            enabled: config.bot.enabled,
+            mode: config.bot.mode,
+            provider: deps.bot.providerName,
+          },
           translation: { available: deps.translation.available, provider: deps.translation.providerName },
           thresholds: {
             sameLanguageInterestMs: config.matching.sameLanguageInterestMs,

@@ -20,6 +20,7 @@ const ui = {
   interestChips: el('interest-chips'),
   startButton: el('start-button'),
   densityLine: el('density-line'),
+  demoNote: el('demo-note'),
   searchStatus: el('search-status'),
   searchDetail: el('search-detail'),
   botOffer: el('bot-offer'),
@@ -171,6 +172,23 @@ async function loadConfig() {
   setLocale(state.language);
   applyTranslations();
   refreshInterestLabels();
+  renderDemoNote();
+}
+
+/**
+ * Says so when the stand-in providers are running.
+ *
+ * Without credentials the echo translator tags strings instead of translating
+ * them and the bot answers from a phrasebook. That is correct behaviour, but
+ * to someone being shown the product it just looks broken — so name it.
+ */
+function renderDemoNote() {
+  const usingStandIns =
+    state.config?.translation?.provider === 'echo' ||
+    state.config?.bot?.provider === 'scripted';
+
+  ui.demoNote.textContent = usingStandIns ? t('demoMode') : '';
+  ui.demoNote.hidden = !usingStandIns;
 }
 
 function toggleInterest(interest, chip) {
@@ -512,6 +530,7 @@ ui.languageSelect.addEventListener('change', () => {
   displayNamesCache.clear();
   applyTranslations();
   refreshInterestLabels();
+  renderDemoNote();
   persist();
   void refreshDensity();
 });
